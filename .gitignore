@@ -43,3 +43,7 @@ Thumbs.db
 
 # not published: someone else's resume
 src/assets/prabakaran_resume.pdf
+
+# Firebase local cache
+.firebase/
+firebase-debug.log*
