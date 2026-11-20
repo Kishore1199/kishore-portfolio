@@ -1,0 +1,82 @@
+<section id="experience" style="background:var(--bg-dark);padding:6rem 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 1.5rem;">
+
+    <div style="margin-bottom:3.5rem;">
+      <p class="section-label section-label-light">Career</p>
+      <h2 class="section-heading section-heading-light">Work Experience</h2>
+      <p style="font-size:0.95rem;color:var(--text-light-muted);margin-top:0.75rem;">3 years total · 2 years professional + 1 year internship</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:1.5rem;">
+
+      <!-- Current -->
+      <div class="card-dark p-7 section-animate">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:1.25rem;">
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <div style="width:44px;height:44px;border-radius:10px;background:var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <div>
+              <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-light);margin:0;">Software Developer</h3>
+              <p style="font-size:0.875rem;color:var(--orange);font-weight:600;margin:0;">Kaaspro Enterprises</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+            <span class="tag-dark">Dec 2024 – Present</span>
+            <span style="padding:0.2rem 0.65rem;border-radius:6px;font-size:0.7rem;font-weight:700;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);color:#34D399;">● Current</span>
+          </div>
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-light-muted);line-height:1.75;margin:0 0 1.25rem;">
+          Developing and maintaining web applications using Java, Spring Boot, Hibernate, Angular, and MySQL — including the
+          75Health cloud EHR platform. This role has strengthened my problem-solving abilities, adaptability, and knowledge of
+          Microservices, HTML, CSS, and TypeScript.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+          <span *ngFor="let t of ['Java 21','Spring Boot','Spring Security','Hibernate','Angular 17','MySQL','MongoDB','Gradle','Microservices','TypeScript','PHP','OpenEMR','Docker']"
+                style="padding:0.2rem 0.625rem;border-radius:6px;font-size:0.7rem;font-weight:600;background:rgba(255,255,255,0.05);border:1px solid var(--border-dark);color:var(--text-light-muted);">{{ t }}</span>
+        </div>
+      </div>
+
+      <!-- Internship -->
+      <div class="card-dark p-7 section-animate">
+        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:1.25rem;">
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <div style="width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,0.07);border:1px solid var(--border-dark);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-light-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <div>
+              <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-light);margin:0;">Java Full Stack Developer Intern</h3>
+              <p style="font-size:0.875rem;color:var(--text-light-muted);font-weight:500;margin:0;">Techietact Solutions Pvt Ltd</p>
+            </div>
+          </div>
+          <span class="tag-dark">Internship · 1 Year</span>
+        </div>
+        <p style="font-size:0.9rem;color:var(--text-light-muted);line-height:1.75;margin:0 0 1.25rem;">
+          Hands-on experience as a Java Full Stack Developer building web applications with Java, Spring Boot, Hibernate,
+          Angular, JSP, Servlets, and MySQL, while learning industry-standard development practices.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+          <span *ngFor="let t of ['Java','Spring Boot','Hibernate','Angular','JSP','Servlets','MySQL']"
+                style="padding:0.2rem 0.625rem;border-radius:6px;font-size:0.7rem;font-weight:600;background:rgba(255,255,255,0.05);border:1px solid var(--border-dark);color:var(--text-light-muted);">{{ t }}</span>
+        </div>
+      </div>
+
+      <!-- Achievements grid -->
+      <div class="grid md:grid-cols-2 gap-4 mt-2">
+        <div *ngFor="let a of achievements" class="card-dark p-5 section-animate">
+          <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+            <div style="width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;"
+                 [style.background]="a.gradient" [innerHTML]="a.icon"></div>
+            <h4 style="font-size:0.875rem;font-weight:700;color:var(--text-light);margin:0;">{{ a.title }}</h4>
+          </div>
+          <ul style="display:flex;flex-direction:column;gap:0.5rem;margin:0;padding:0;list-style:none;">
+            <li *ngFor="let item of a.items" class="check-item-light">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
+              {{ item }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

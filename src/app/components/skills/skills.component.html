@@ -1,0 +1,68 @@
+<section id="skills" style="background:var(--bg-tint);padding:6rem 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 1.5rem;">
+
+    <div style="text-align:center;margin-bottom:3rem;" class="section-animate">
+      <p class="section-label" style="justify-content:center;">Technical Expertise</p>
+      <h2 class="section-heading" style="text-align:center;">Skills &amp; Technologies</h2>
+      <p style="font-size:0.95rem;color:var(--text-muted);margin-top:0.75rem;">{{ categories.length }} categories · {{ totalSkills }}+ technologies</p>
+    </div>
+
+    <!-- Tab buttons -->
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.625rem;margin-bottom:2.5rem;" class="section-animate">
+      <button *ngFor="let cat of categories"
+              class="skill-tab"
+              [class.active]="activeCategory === cat.name"
+              (click)="selectCategory(cat.name)">
+        {{ cat.name }}
+      </button>
+    </div>
+
+    <!-- Active category card -->
+    <div class="card p-8 section-animate" style="min-height:200px;">
+
+      <!-- Category header -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border-light);">
+        <div>
+          <h3 style="font-size:1.05rem;font-weight:700;color:var(--text-dark);margin:0;">{{ activeCategory }}</h3>
+          <p style="font-size:0.8rem;color:var(--text-muted);margin:0.25rem 0 0;">{{ activeSkills.length }} technologies</p>
+        </div>
+        <div style="display:flex;gap:0.4rem;">
+          <span *ngFor="let cat of categories"
+                style="width:8px;height:8px;border-radius:50%;transition:background 0.2s;"
+                [style.background]="activeCategory === cat.name ? 'var(--orange)' : 'var(--border-med)'">
+          </span>
+        </div>
+      </div>
+
+      <!-- Skills grid -->
+      <div style="display:flex;flex-wrap:wrap;gap:0.625rem;">
+        <div *ngFor="let skill of activeSkills; let i = index"
+             class="skill-chip"
+             [style.animation-delay]="(i * 30) + 'ms'"
+             style="animation:fadeInUp 0.35s ease both;">
+          <span style="width:8px;height:8px;border-radius:50%;flex-shrink:0;"
+                [style.background]="skill.color"
+                [style.box-shadow]="'0 0 4px ' + skill.color + '80'">
+          </span>
+          {{ skill.name }}
+        </div>
+      </div>
+    </div>
+
+    <!-- All categories mini preview -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-6 section-animate">
+      <div *ngFor="let cat of categories"
+           (click)="selectCategory(cat.name)"
+           style="padding:1rem 1.25rem;border-radius:10px;cursor:pointer;transition:background 0.2s,border-color 0.2s,transform 0.2s;"
+           [style.background]="activeCategory === cat.name ? '#FFF7ED' : 'var(--bg-white)'"
+           [style.border]="'1px solid ' + (activeCategory === cat.name ? '#FED7AA' : 'var(--border-light)')"
+           onmouseover="this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.transform='translateY(0)'">
+        <p style="font-size:0.75rem;font-weight:700;margin:0 0 0.25rem;"
+           [style.color]="activeCategory === cat.name ? 'var(--orange-dark)' : 'var(--text-dark)'">{{ cat.name }}</p>
+        <p style="font-size:0.72rem;color:var(--text-muted);margin:0;">{{ cat.skills.length }} skills</p>
+      </div>
+    </div>
+
+  </div>
+</section>

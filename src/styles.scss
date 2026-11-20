@@ -1,1 +1,418 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── DESIGN TOKENS (Light — warm sandal, uniform) ── */
+:root {
+  --orange:      #F97316;
+  --orange-dark: #EA580C;
+  --emerald:     #10B981;
+  --amber:       #F59E0B;
+
+  /* ALL section backgrounds = same sandal */
+  --bg-page:    #F5EFE6;
+  --bg-tint:    #F5EFE6;
+  --bg-white:   #FFFFFF;   /* card background — white on sandal */
+  --bg-dark:    #F5EFE6;   /* dark sections now sandal */
+  --bg-dark-2:  #E8DFD0;   /* card-dark — slightly deeper sandal */
+
+  /* Text */
+  --text-dark:        #2C1E12;
+  --text-med:         #5C4A36;
+  --text-muted:       #8C7A68;
+  --text-light:       #2C1E12;  /* dark-section text is now dark */
+  --text-light-muted: #7A6658;
+
+  /* Borders */
+  --border-light: #D9CEBC;
+  --border-dark:  #C8B49A;
+  --border-med:   #C4B49E;
+
+  /* Shadows */
+  --shadow-card:       0 1px 3px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.07);
+  --shadow-card-hover: 0 4px 8px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.1);
+  --shadow-dark:       0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.08);
+  --shadow-dark-hover: 0 4px 8px rgba(0,0,0,0.1), 0 16px 40px rgba(0,0,0,0.12);
+
+  --radius:    12px;
+  --radius-sm: 8px;
+}
+
+/* ── DARK MODE — light grey, uniform ── */
+html.dark {
+  /* ALL section backgrounds = same light grey */
+  --bg-page:    #2E2E2E;
+  --bg-tint:    #2E2E2E;
+  --bg-white:   #3A3A3A;   /* card background — slightly lighter grey */
+  --bg-dark:    #2E2E2E;
+  --bg-dark-2:  #3A3A3A;
+
+  --text-dark:        #F0F0F0;
+  --text-med:         #C8C8C8;
+  --text-muted:       #909090;
+  --text-light:       #F0F0F0;
+  --text-light-muted: #A0A0A0;
+
+  --border-light: #484848;
+  --border-dark:  #484848;
+  --border-med:   #555555;
+
+  --shadow-card:       0 1px 3px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.25);
+  --shadow-card-hover: 0 4px 8px rgba(0,0,0,0.3), 0 12px 32px rgba(249,115,22,0.08);
+  --shadow-dark:       0 1px 3px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.25);
+  --shadow-dark-hover: 0 4px 8px rgba(0,0,0,0.3), 0 12px 32px rgba(0,0,0,0.35);
+}
+
+/* ── LIGHT MODE OVERRIDES for elements designed for dark sections ── */
+html:not(.dark) .section-heading-light { color: var(--text-dark) !important; }
+html:not(.dark) .section-label-light   { color: var(--orange) !important; }
+html:not(.dark) .section-label-light::before { background: var(--orange) !important; }
+
+html:not(.dark) .btn-outline-light {
+  color: var(--text-dark);
+  border-color: var(--border-light);
+}
+html:not(.dark) .btn-outline-light:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+  background: rgba(249,115,22,0.05);
+}
+
+html:not(.dark) .hero-social {
+  color: var(--text-muted);
+  border-color: var(--border-light);
+}
+html:not(.dark) .hero-social:hover {
+  color: var(--text-dark);
+  border-color: var(--border-med);
+  background: rgba(0,0,0,0.03);
+}
+
+html:not(.dark) .card-dark {
+  background: #FFFFFF;
+  border-color: var(--border-light);
+  box-shadow: var(--shadow-card);
+}
+html:not(.dark) .card-dark:hover {
+  border-color: var(--border-med);
+  box-shadow: var(--shadow-card-hover);
+}
+
+html:not(.dark) .skill-chip { background: #FFFFFF; }
+html:not(.dark) .tag-dark {
+  background: rgba(249,115,22,0.08);
+  border-color: rgba(249,115,22,0.25);
+  color: var(--orange-dark);
+}
+
+/* dark mode skill chip needs contrast against uniform grey */
+html.dark .skill-chip { background: var(--bg-white); }
+
+/* ── BASE ── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-dark);
+  margin: 0; padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1,h2,h3,h4,h5,h6 { letter-spacing: -0.03em; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-tint); }
+::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 99px; }
+
+/* ── SECTION ANIMATIONS ── */
+.section-animate {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+}
+.section-animate.visible { opacity: 1; transform: translateY(0); }
+
+/* ── CARDS ── */
+.card {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+.card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+  border-color: var(--border-med);
+}
+.card-dark {
+  background: var(--bg-dark-2);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-dark);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+.card-dark:hover {
+  box-shadow: var(--shadow-dark-hover);
+  transform: translateY(-2px);
+  border-color: #57534E;
+}
+
+/* ── BUTTONS ── */
+.btn-primary {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--orange);
+  color: #fff;
+  font-weight: 600; font-size: 0.925rem;
+  padding: 0.7rem 1.75rem;
+  border-radius: var(--radius-sm);
+  border: none; cursor: pointer; text-decoration: none;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1), 0 4px 12px rgba(249,115,22,0.3);
+}
+.btn-primary:hover {
+  background: var(--orange-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 8px 20px rgba(249,115,22,0.4);
+}
+.btn-primary:disabled {
+  opacity: 0.65; cursor: not-allowed; transform: none;
+}
+.btn-outline-light {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent;
+  color: var(--text-light);
+  font-weight: 600; font-size: 0.925rem;
+  padding: 0.7rem 1.75rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  cursor: pointer; text-decoration: none;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+.btn-outline-light:hover {
+  border-color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.07);
+  transform: translateY(-1px);
+}
+.btn-outline-dark {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent;
+  color: var(--text-dark);
+  font-weight: 600; font-size: 0.925rem;
+  padding: 0.7rem 1.75rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border-light);
+  cursor: pointer; text-decoration: none;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+.btn-outline-dark:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+  background: rgba(249,115,22,0.04);
+  transform: translateY(-1px);
+}
+
+/* ── SECTION HEADER ── */
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.75rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 20px; height: 2px;
+  background: var(--orange);
+  border-radius: 99px;
+}
+.section-heading {
+  font-size: clamp(1.9rem, 4vw, 2.65rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text-dark);
+}
+.section-heading-light { color: var(--text-light) !important; }
+.section-label-light { color: #FB923C !important; }
+.section-label-light::before { background: #FB923C !important; }
+
+/* ── TAGS ── */
+.tag {
+  padding: 0.2rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.7rem; font-weight: 600;
+  background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.25); color: var(--orange-dark);
+}
+.tag-dark {
+  padding: 0.2rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.7rem; font-weight: 600;
+  background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.2); color: #FB923C;
+}
+.tag-muted {
+  padding: 0.2rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.7rem; font-weight: 600;
+  background: var(--bg-tint); border: 1px solid var(--border-light); color: var(--text-muted);
+}
+
+/* ── CHECK ITEMS ── */
+.check-item {
+  display: flex; align-items: flex-start; gap: 0.625rem;
+  font-size: 0.875rem; color: var(--text-med);
+}
+.check-item-light {
+  display: flex; align-items: flex-start; gap: 0.625rem;
+  font-size: 0.875rem; color: var(--text-light-muted);
+}
+
+/* ── PROJECT SLIDER ── */
+.slider-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+.slider-track {
+  display: flex;
+  transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+.slide {
+  flex: 0 0 100%;
+  width: 100%;
+}
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--text-dark);
+  z-index: 10;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.slider-btn:hover {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(249,115,22,0.35);
+  transform: translateY(-50%) scale(1.05);
+}
+.slider-btn-prev { left: -22px; }
+.slider-btn-next { right: -22px; }
+.slider-dots {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  margin-top: 1.75rem;
+}
+.slider-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border-med);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, width 0.2s;
+  border: none;
+}
+.slider-dot.active {
+  background: var(--orange);
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* ── SKILL TABS ── */
+.skill-tab {
+  padding: 0.5rem 1.25rem;
+  border-radius: 99px;
+  font-size: 0.825rem; font-weight: 600;
+  border: 1.5px solid var(--border-light);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+.skill-tab:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+.skill-tab.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(249,115,22,0.3);
+}
+.skill-chip {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  border-radius: 99px;
+  font-size: 0.8rem; font-weight: 500;
+  background: var(--bg-tint);
+  border: 1px solid var(--border-light);
+  color: var(--text-med);
+  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+  cursor: default;
+}
+.skill-chip:hover {
+  border-color: var(--orange);
+  color: var(--text-dark);
+  box-shadow: 0 2px 8px rgba(249,115,22,0.1);
+  transform: translateY(-1px);
+}
+
+/* ── HERO SOCIAL LINKS ── */
+.hero-social {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.8rem; font-weight: 500;
+  color: var(--text-light-muted);
+  border: 1px solid var(--border-dark);
+  text-decoration: none;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.hero-social:hover {
+  color: var(--text-light);
+  border-color: #78716C;
+  background: rgba(255,255,255,0.06);
+}
+
+/* ── STAT BOXES ── */
+.stat-box {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 1rem;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid var(--border-dark);
+}
+.stat-num {
+  font-size: 1.75rem; font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--orange); line-height: 1;
+}
+.stat-label {
+  font-size: 0.7rem; font-weight: 600;
+  color: var(--text-light-muted);
+  margin-top: 0.25rem;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+
+@keyframes fadeInUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }

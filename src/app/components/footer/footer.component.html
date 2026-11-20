@@ -1,0 +1,29 @@
+<footer style="background:var(--bg-dark);padding:3rem 0;border-top:1px solid var(--border-dark);">
+  <div style="max-width:1200px;margin:0 auto;padding:0 1.5rem;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;">
+
+      <a href="#home" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;"
+         style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:800;color:var(--orange);text-decoration:none;display:inline-flex;align-items:center;gap:0.55rem;transition:opacity 0.2s;"
+         onmouseover="this.style.opacity='0.75'" onmouseout="this.style.opacity='1'">
+        <img src="assets/favicon.svg" alt="" width="28" height="28" style="display:block;border-radius:8px;">
+        kishore.dev
+      </a>
+
+      <div style="display:flex;gap:1.5rem;">
+        <a href="https://github.com/Kishore1199" target="_blank" rel="noopener noreferrer"
+           style="font-size:0.825rem;color:var(--text-light-muted);text-decoration:none;transition:color 0.2s;"
+           onmouseover="this.style.color='var(--text-light)'" onmouseout="this.style.color='var(--text-light-muted)'">GitHub</a>
+        <a href="https://www.linkedin.com/in/kishore-v-a64b2417b/" target="_blank" rel="noopener noreferrer"
+           style="font-size:0.825rem;color:var(--text-light-muted);text-decoration:none;transition:color 0.2s;"
+           onmouseover="this.style.color='var(--text-light)'" onmouseout="this.style.color='var(--text-light-muted)'">LinkedIn</a>
+        <a href="mailto:kishorebe1199@gmail.com"
+           style="font-size:0.825rem;color:var(--text-light-muted);text-decoration:none;transition:color 0.2s;"
+           onmouseover="this.style.color='var(--text-light)'" onmouseout="this.style.color='var(--text-light-muted)'">Email</a>
+      </div>
+
+      <p style="font-size:0.8rem;color:var(--text-light-muted);margin:0;">
+        &copy; {{ year }} Kishore V &middot; Built with Angular 17
+      </p>
+    </div>
+  </div>
+</footer>
